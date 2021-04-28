@@ -6,17 +6,20 @@ namespace Lab4
     {
         static void Main(string[] args)
         {
-            //int[] score = new int[5];
+            cgpaCalc();
+
+        }
+
+        private static void cgpaCalc()
+        {
             double[] scores = new double[5];
-            double cgpa, sum = 0, percentage;
-            string[] position = { "1st", "2nd", "3rd", "4th", "5th" };
-
-
+            double cgpa, sum = 0d, percentage;
+            string percentageStr=null;
             for (int i = 0; i < scores.Length; i++)
             {
 
 
-                Console.Write($"Enter  scores: ");
+                Console.Write($"Enter your score: ");
                 string input = Console.ReadLine();
                 if (!double.TryParse(input, out scores[i]))
                 {
@@ -29,56 +32,47 @@ namespace Lab4
 
 
             }
-
-
-            for (int i = 0; i < scores.Length; i++)
-            {
-                scores[i] = scores[i] / 10;
-
-            }
-            for (int i = 0; i < scores.Length; i++)
-            {
-                sum += scores[i];
-            }
-
-            cgpa = sum / 5;
-            percentage = cgpa * 9.5;
-            Console.WriteLine(cgpa);
+            Console.Write($"Your Scores are: ");
             foreach (var i in scores)
             {
-                Console.WriteLine(i);
+                Console.Write($"{i}, ");
             }
 
-            //var res = scores.Zip(position, (n, w) => new { Number = n, Word = w });
-            //int index = 0;
-            //foreach(var i in res)
-            //{
-            //    Console.Write($"Enter your {i.Word} score: ");
-            //    var input = Console.ReadLine();
+            Console.WriteLine("Please check if scores are correct");
+            Console.Write("If correct, Enter 'Yes' to continue or 'No' to start again:  ");
+            string ans = Console.ReadLine();
+            if (ans.ToLower() == "yes")
+            {
+                for (int i = 0; i < scores.Length; i++)
+                {
+                    scores[i] = scores[i] / 10;
 
-            //    while (!int.TryParse(input, out scores[i.Number]))
-            //    {
-            //        // Tell the user something went wrong:
-            //        Console.WriteLine($"Sorry, '{input}' is not a valid number.");
+                }
+                for (int i = 0; i < scores.Length; i++)
+                {
+                    sum += scores[i];
+                }
 
-            //        // Don't move to the next array element:
-            //        Console.Write($"Enter your {i.Word} score: ");
-            //        input = Console.ReadLine();
-            //    }
-            //    scores[i.Number] = Convert.ToInt32(index);
-            //    index++;
+                cgpa = sum / 5;
+                percentage = Math.Round(cgpa * 9.5, 2);
+                Console.WriteLine($"Your CGPA is: {cgpa}");
+                Console.WriteLine($"Your CGPA Percentage is: {percentage}");
+                Console.ReadKey();
+            }
+            while (ans.ToLower() != "yes" && ans.ToLower() != "no")
+            {
+                Console.WriteLine("Invalid option");
+                Console.WriteLine("Please check if scores are correct");
+                Console.Write("If correct, Enter 'Yes' to continue or 'No' to start again");
+                ans = Console.ReadLine();
+            }
+            if (ans.ToLower() == "no")
+            {
+
+                cgpaCalc();
 
 
-            //}
-
-            //foreach (var i in res)
-            //{
-            //    Console.WriteLine(i);
-            //}
-
-
-
-
+            }
         }
     
     }
