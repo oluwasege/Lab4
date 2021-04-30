@@ -45,7 +45,14 @@ namespace Lab4
             string ans = Console.ReadLine();
             while (ans.ToLower() != "yes" && ans.ToLower() != "no")
             {
+                Console.Clear();
                 Console.WriteLine("Invalid option");
+                Console.WriteLine();
+                Console.Write($"Your Scores are:  ");
+                foreach (var i in scores)
+                {
+                    Console.Write($"{i}, ");
+                }
                 Console.WriteLine("Please check if scores are correct");
                 Console.Write("If correct, Enter 'Yes' to continue or 'No' to start again :");
                 ans = Console.ReadLine();
@@ -71,6 +78,7 @@ namespace Lab4
             
             else if (ans.ToLower() == "no")
             {
+                Console.Clear();
                 Console.Write("How many scores do you want to calculate: ");
                 n = Convert.ToInt32(Console.ReadLine());
                 cgpaCalc(n);
