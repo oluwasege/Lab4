@@ -6,16 +6,18 @@ namespace Lab4
     {
         static void Main(string[] args)
         {
-            cgpaCalc();
+            Console.Write("How many scores do you want to calculate: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            cgpaCalc(n);
 
         }
 
-        private static void cgpaCalc()
+        private static void cgpaCalc(int n)
         {
-            double[] scores = new double[5];
+            double[] scores = new double[n];
             double cgpa, sum = 0d, percentage;
-            string percentageStr=null;
-            for (int i = 0; i < scores.Length; i++)
+           // string percentageStr=null;
+            for (int i = 0; i < n; i++)
             {
 
 
@@ -41,38 +43,41 @@ namespace Lab4
             Console.WriteLine("Please check if scores are correct");
             Console.Write("If correct, Enter 'Yes' to continue or 'No' to start again:  ");
             string ans = Console.ReadLine();
+            while (ans.ToLower() != "yes" && ans.ToLower() != "no")
+            {
+                Console.WriteLine("Invalid option");
+                Console.WriteLine("Please check if scores are correct");
+                Console.Write("If correct, Enter 'Yes' to continue or 'No' to start again :");
+                ans = Console.ReadLine();
+            }
             if (ans.ToLower() == "yes")
             {
-                for (int i = 0; i < scores.Length; i++)
+                for (int i = 0; i < n; i++)
                 {
                     scores[i] = scores[i] / 10;
 
                 }
-                for (int i = 0; i < scores.Length; i++)
+                for (int i = 0; i < n; i++)
                 {
                     sum += scores[i];
                 }
 
-                cgpa = sum / 5;
+                cgpa = sum / n;
                 percentage = Math.Round(cgpa * 9.5, 2);
                 Console.WriteLine($"Your CGPA is: {cgpa}");
                 Console.WriteLine($"Your CGPA Percentage is: {percentage}");
                 Console.ReadKey();
             }
-            while (ans.ToLower() != "yes" && ans.ToLower() != "no")
+            
+            else if (ans.ToLower() == "no")
             {
-                Console.WriteLine("Invalid option");
-                Console.WriteLine("Please check if scores are correct");
-                Console.Write("If correct, Enter 'Yes' to continue or 'No' to start again");
-                ans = Console.ReadLine();
-            }
-            if (ans.ToLower() == "no")
-            {
-
-                cgpaCalc();
+                Console.Write("How many scores do you want to calculate: ");
+                n = Convert.ToInt32(Console.ReadLine());
+                cgpaCalc(n);
 
 
             }
+            
         }
     
     }
